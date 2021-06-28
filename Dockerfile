@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt update && \
-    apt install -y wget curl tmux vim nano zsh python python3 python3-pip gdb radare2 strace ltrace jq dnsutils net-tools netcat gcc-multilib git make unzip unrar fakeroot hexedit
+    apt install -y wget curl tmux vim nano zsh python python3 python3-pip gdb radare2 strace ltrace jq dnsutils net-tools inetutils-ping netcat gcc-multilib git make unzip unrar fakeroot hexedit
 
 RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
     python get-pip.py && \
