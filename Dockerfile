@@ -13,7 +13,7 @@ WORKDIR /root
 
 COPY . .
 
-RUN while read $i; do sh -c releases/$i; done < <(ls -1 releases) && \
+RUN for r in $(ls releases); do sh -c releases/$r; done && \
     rm -rf releases
 
 RUN apt install -y strace ltrace dnsutils net-tools inetutils-ping netcat unzip unrar jq
