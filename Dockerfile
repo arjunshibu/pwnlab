@@ -1,17 +1,22 @@
-FROM ubuntu:18.04
+FROM ubuntu:21.04
 
-RUN apt update && \
-    apt install -y wget curl tmux vim nano zsh python python3 python3-pip gdb radare2 strace ltrace jq dnsutils net-tools inetutils-ping netcat gcc-multilib git make unzip unrar fakeroot hexedit
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
-    python get-pip.py && \
-    pip install pwntools
+RUN apt update
+RUN apt install -y wget curl python3 python3-pip gcc-multilib gdb make git tmux vim zsh
 
-RUN bash -c "$(curl -fsSL http://gef.blah.cat/sh)" && \
-    pip3 install keystone-engine unicorn capstone ropper
+RUN pip install pwntools ropper keystone-engine
+
+RUN curl -fsSL http://gef.blah.cat/sh | bash
 
 WORKDIR /root
 
 COPY . .
+
+RUN while read $i; do sh -c releases/$i; done < <(ls -1 releases) && \
+    rm -rf releases
+
+RUN apt install -y strace ltrace dnsutils net-tools inetutils-ping netcat unzip unrar jq
+RUN apt install -y fakeroot hexedit systemd-coredump
 
 CMD ["zsh"]
