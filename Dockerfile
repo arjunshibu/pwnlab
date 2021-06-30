@@ -13,10 +13,10 @@ WORKDIR /root
 
 COPY . .
 
-RUN for r in $(ls releases); do sh -c releases/$r; done && \
+RUN for r in $(ls releases); do bash -c releases/$r; done && \
     rm -rf releases
 
 RUN apt install -y strace ltrace dnsutils net-tools inetutils-ping netcat unzip unrar jq
-RUN apt install -y fakeroot hexedit systemd-coredump
+RUN apt install -y hexedit systemd-coredump
 
 CMD ["zsh"]

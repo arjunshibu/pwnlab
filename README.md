@@ -1,5 +1,5 @@
 # pwnlab
-Docker Container for Pwn - Based on Ubuntu 18.04
+Docker Container for Pwn - Based on Ubuntu 21.04
 
 ## Installation
 
